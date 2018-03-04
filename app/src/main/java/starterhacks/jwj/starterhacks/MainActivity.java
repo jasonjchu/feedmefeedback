@@ -14,10 +14,9 @@ import java.util.ArrayList;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
-import static java.security.AccessController.getContext;
-
 public class MainActivity extends AppCompatActivity {
     private ArrayList<String> incomplete = new ArrayList<String>();
+    private ArrayList<String> coupon = new ArrayList<String>();
 
     public String code = "INIT";
 
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.navigation_rewards:
                     TextView view2 = (TextView) findViewById(R.id.message);
                     view2.setText("Rewards");
+                    updateCoupon();
                     return true;
             }
             return false;
@@ -78,6 +78,16 @@ public class MainActivity extends AppCompatActivity {
         ListView lv1 = (ListView) findViewById(R.id.lView1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,incomplete.toArray(new String[incomplete.size()]));
+        lv1.setAdapter(adapter);
+        lv1.setVisibility(View.VISIBLE);
+    }
+
+    private void updateCoupon(){
+        TextView view1 = (TextView) findViewById(R.id.message);
+        view1.setText("Rewards");
+        ListView lv1 = (ListView) findViewById(R.id.lView1);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,coupon.toArray(new String[coupon.size()]));
         lv1.setAdapter(adapter);
         lv1.setVisibility(View.VISIBLE);
     }
