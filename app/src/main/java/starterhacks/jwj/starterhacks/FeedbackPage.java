@@ -1,12 +1,10 @@
 package starterhacks.jwj.starterhacks;
 
 import com.google.gson.Gson;
+
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -74,6 +72,7 @@ public class FeedbackPage extends AppCompatActivity {
                         Button butt = new Button(getApplicationContext());
                         butt.setText("Submit!");
                         butt.setId(View.generateViewId());
+                        butt.setOnClickListener(myHandler);
                         layout.addView(butt);
                     }
                 }, new Response.ErrorListener() {
@@ -87,4 +86,10 @@ public class FeedbackPage extends AppCompatActivity {
         queue.add(jsObjRequest);
 
     }
+
+    View.OnClickListener myHandler = new View.OnClickListener() {
+        public void onClick(View v) {
+            finish();
+        }
+    };
 }
