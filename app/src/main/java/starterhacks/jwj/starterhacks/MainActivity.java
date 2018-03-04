@@ -25,8 +25,6 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> incomplete = new ArrayList<String>();
     private ArrayList<String> coupon = new ArrayList<String>();
 
-    private ListView lv = findViewById(R.id.lView1);
-
     public String code = "INIT";
 
     private void getScanner(){
@@ -62,8 +60,11 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final ListView lv = findViewById(R.id.lView1);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
