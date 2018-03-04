@@ -8,10 +8,11 @@
     tools:context="starterhacks.jwj.starterhacks.FeedbackPage">
 
     <LinearLayout
+        android:id="@+id/feedPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/feedPage"
-        android:orientation="horizontal">
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical">
 
     </LinearLayout>
 

@@ -96,13 +96,13 @@ public class MainActivity extends AppCompatActivity {
             code = data.getStringExtra("SCAN_RESULT");
             view.setVisibility(view.VISIBLE);
             view.setText("Success!");
+            System.out.println(code);
+            String append = code;
+            incomplete.add(append);
         } else {
             view.setText("Failure!");
             view.setVisibility(view.VISIBLE);
         }
-        System.out.println(code);
-        String append = code;
-        incomplete.add(append);
         ListView lview1 = (ListView) findViewById(R.id.lView1);
         lview1.setVisibility(lview1.GONE);
     }

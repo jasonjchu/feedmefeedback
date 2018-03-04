@@ -19,6 +19,7 @@ android {
 }
 
 dependencies {
+    compile 'com.google.code.gson:gson:2.2.+'
     compile 'com.android.volley:volley:1.1.0'
     compile group: 'org.apache.httpcomponents' , name: 'httpclient-android' , version: '4.3.5.1'
     compile 'com.mashape.unirest:unirest-android:1.0+'
