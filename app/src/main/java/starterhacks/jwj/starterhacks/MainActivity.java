@@ -61,20 +61,27 @@ public class MainActivity extends AppCompatActivity {
         TextView view = (TextView) findViewById(R.id.message);
         if (resultCode == RESULT_OK) {
             code = data.getStringExtra("SCAN_RESULT");
+            view.setVisibility(view.VISIBLE);
             view.setText("Success!");
             System.out.println(code);
+            String append = code;
+            incomplete.add(append);
         } else {
             view.setText("Failure!");
+            view.setVisibility(view.VISIBLE);
         }
-        String append = code;
-        incomplete.add(append);
         ListView lview1 = (ListView) findViewById(R.id.lView1);
         lview1.setVisibility(lview1.GONE);
     }
 
     private void updateListToDo(){
         TextView view1 = (TextView) findViewById(R.id.message);
-        view1.setText("To Do");
+        if(incomplete.size() == 0){
+            view1.setVisibility(view1.VISIBLE);
+            view1.setText("To Do");
+        } else{
+            view1.setVisibility(view1.GONE);
+        }
         ListView lv1 = (ListView) findViewById(R.id.lView1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,incomplete.toArray(new String[incomplete.size()]));
@@ -84,11 +91,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void updateCoupon(){
         TextView view1 = (TextView) findViewById(R.id.message);
-        view1.setText("Rewards");
+        if(incomplete.size() == 0){
+            view1.setVisibility(view1.VISIBLE);
+            view1.setText("Rewards");
+        } else{
+            view1.setVisibility(view1.GONE);
+        }
         ListView lv1 = (ListView) findViewById(R.id.lView1);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,coupon.toArray(new String[coupon.size()]));
         lv1.setAdapter(adapter);
-        lv1.setVisibility(View.VISIBLE);
+        lv1.setVisibility(lv1.VISIBLE);
     }
 }
