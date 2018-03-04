@@ -17,7 +17,11 @@ import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
+
 public class MainActivity extends AppCompatActivity {
+    private boolean to_do = true;
+    private boolean rewards = false;
+
     private ArrayList<String> incomplete = new ArrayList<String>();
     private ArrayList<String> coupon = new ArrayList<String>();
 
@@ -37,14 +41,19 @@ public class MainActivity extends AppCompatActivity {
             switch (item.getItemId()) {
                 case R.id.navigation_to_do:
                     updateListToDo();
+                    to_do = true;
+                    rewards = false;
                     return true;
                 case R.id.navigation_scan:
                     getScanner();
+                    to_do = false;
+                    rewards = false;
                     return true;
                 case R.id.navigation_rewards:
                     TextView view2 = (TextView) findViewById(R.id.message);
-                    view2.setText("Rewards");
                     updateCoupon();
+                    to_do = false;
+                    rewards = true;
                     return true;
             }
             return false;
@@ -65,9 +74,15 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3){
                 String item = adapter.getItemAtPosition(position).toString();
 
-                Intent intent = new Intent(getApplicationContext(),CouponDetails.class);
-                intent.putExtra("passedCode",item);
-                startActivity(intent);
+                if(rewards) {
+                    Intent intent = new Intent(getApplicationContext(), CouponDetails.class);
+                    intent.putExtra("passedCode", item);
+                    startActivity(intent);
+                } else if(to_do){
+                    Intent intent = new Intent(getApplicationContext(), FeedbackPage.class);
+                    intent.putExtra("passedCode", item);
+                    startActivity(intent);
+                }
             }
         });
     }
@@ -80,13 +95,13 @@ public class MainActivity extends AppCompatActivity {
             code = data.getStringExtra("SCAN_RESULT");
             view.setVisibility(view.VISIBLE);
             view.setText("Success!");
-            System.out.println(code);
-            String append = code;
-            incomplete.add(append);
         } else {
             view.setText("Failure!");
             view.setVisibility(view.VISIBLE);
         }
+        System.out.println(code);
+        String append = code;
+        incomplete.add(append);
         ListView lview1 = (ListView) findViewById(R.id.lView1);
         lview1.setVisibility(lview1.GONE);
     }

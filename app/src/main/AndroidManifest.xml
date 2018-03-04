@@ -21,7 +21,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CouponDetails"></activity>
+        <activity android:name=".CouponDetails" />
+        <activity
+            android:name=".FeedbackPage"
+            android:label="@string/title_activity_feedback_page"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
