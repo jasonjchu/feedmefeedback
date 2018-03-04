@@ -1,5 +1,6 @@
 package starterhacks.jwj.starterhacks;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,16 +8,20 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.ArrayList;
+import android.widget.AdapterView.OnItemClickListener;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 
 public class MainActivity extends AppCompatActivity {
     private ArrayList<String> incomplete = new ArrayList<String>();
     private ArrayList<String> coupon = new ArrayList<String>();
+
+    private ListView lv = findViewById(R.id.lView1);
 
     public String code = "INIT";
 
@@ -53,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+
+        lv.setClickable(true);
+        lv.setOnItemClickListener(new OnItemClickListener(){
+            @Override
+            public void onItemClick(AdapterView<?> adapter, View arg1, int position, long arg3){
+                String item = adapter.getItemAtPosition(position).toString();
+
+                Intent intent = new Intent(getApplicationContext(),CouponDetails.class);
+                intent.putExtra("passedCode",item);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
